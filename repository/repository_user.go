@@ -27,17 +27,6 @@ func (repo *UserRepository) CreateUserNew(users *model.Users) (int, error) {
 		return 0, err
 	}
 	return lastInsertId, nil
-
-	// result, err := repo.DB.Exec(`INSERT INTO users (first_name, last_name, email, password, nacionality) VALUES (?,?,?,?,?)`, users.FirstName, users.LastName, users.Email, users.Password, users.Nacionality)
-	// if err != nil {
-	// 	return 0, nil
-	// }
-	// lastInsertId, err := result.LastInsertId()
-	// if err != nil {
-	// 	return 0, nil
-	// }
-	// return int(lastInsertId), nil
-
 }
 
 func (repo *UserRepository) GetAllUsers() ([]model.Users, error) {

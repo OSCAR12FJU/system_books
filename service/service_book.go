@@ -26,6 +26,14 @@ func (service *BookService) GetBooks() ([]model.Books, error) {
 	return books, nil
 }
 
+func (service *BookService) SearchBook() ([]model.Books, error) {
+	books, err := service.Repo.SearchBook()
+	if err != nil {
+		return nil, err
+	}
+	return books, nil
+}
+
 func (service *BookService) UpdateBook(book model.Books) (model.Books, error) {
 	err := service.Repo.UpdateBook(book)
 	return book, err

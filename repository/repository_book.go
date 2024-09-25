@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+	"fmt"
 	"homework-apirest/model"
 )
 
@@ -31,7 +32,7 @@ func (repo *BookRepository) SaveBook(books *model.Books) (int, error) {
 }
 
 func (repo *BookRepository) GetAllBooks() ([]model.Books, error) {
-	rows, err := repo.DB.Query("SELECT book_id, name, author,image, status FROM books")
+	rows, err := repo.DB.Query("SELECT book_id, name, author,image, status, description FROM books")
 	if err != nil {
 		return nil, err
 	}
@@ -41,12 +42,34 @@ func (repo *BookRepository) GetAllBooks() ([]model.Books, error) {
 
 	for rows.Next() {
 		var book model.Books
-		err := rows.Scan(&book.ID, &book.Name, &book.Author, &book.Image, &book.Status)
+		err := rows.Scan(&book.ID, &book.Name, &book.Author, &book.Image, &book.Status, &book.Description, &book.Pages)
 		if err != nil {
 			return nil, err
 		}
 		books = append(books, book)
 	}
+	fmt.Println(books)
+	return books, nil
+
+}
+func (repo *BookRepository) SearchBook() ([]model.Books, error) {
+	rows, err := repo.DB.Query("SELECT book_id, name, author,image, status, description, pages FROM books")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var books []model.Books
+
+	for rows.Next() {
+		var book model.Books
+		err := rows.Scan(&book.ID, &book.Name, &book.Author, &book.Image, &book.Status, &book.Description, &book.Pages)
+		if err != nil {
+			return nil, err
+		}
+		books = append(books, book)
+	}
+	fmt.Println(books)
 	return books, nil
 }
 

@@ -49,7 +49,9 @@ func main() {
 	//Routes Peticiones Book
 	router.HandleFunc("/create-book", bookController.CreateBookNew).Methods("POST")
 	router.PathPrefix("/uploads/").Handler(http.StripPrefix("/uploads/", http.FileServer(http.Dir("uploads"))))
-	router.HandleFunc("/get-books", bookController.GetBooks).Methods("GET")
+	// router.HandleFunc("/get-books", bookController.GetBooks).Methods("GET")
+	// router.HandleFunc("/get-book", bookController.GetBooks).Methods("GET")
+	router.HandleFunc("/search-book", bookController.SearchBooks).Methods("GET")
 	router.HandleFunc("/get-books/{id}", bookController.GetBookByID).Methods("GET")
 	//Routes Book Page
 	router.HandleFunc("/books/{bookName}", bookController.GetBookByName).Methods("GET")

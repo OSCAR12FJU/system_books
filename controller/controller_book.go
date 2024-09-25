@@ -97,8 +97,8 @@ func (c *BookController) CreateBookNew(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(newBook)
 }
 
-func (c *BookController) GetBooks(w http.ResponseWriter, r *http.Request) {
-	books, err := c.Service.GetBooks()
+func (c *BookController) SearchBooks(w http.ResponseWriter, r *http.Request) {
+	books, err := c.Service.SearchBook()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
